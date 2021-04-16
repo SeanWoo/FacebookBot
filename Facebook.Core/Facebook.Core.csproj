@@ -54,9 +54,6 @@
     <Compile Include="DataLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy\ProxyProvider.cs" />
-    <Compile Include="UserModels\TweetData.cs" />
-    <Compile Include="UserModels\UserInfo.cs" />
-    <Compile Include="UserModels\VerifyCredentials.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

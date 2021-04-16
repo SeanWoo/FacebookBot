@@ -19,17 +19,22 @@ namespace Facebook.Tests
             _account.EnableProxies = false;
             _account.Authorization();
         }
-        //
         [Fact]
         public void Like()
         {
-            var result = _account.Like("10158057603891104");
+            var result = _account.Like("10166091207755725");
             Assert.True(result);
         }
         [Fact]
         public void LikeComment()
         {
-            var result = _account.Like("10158057603891104", "738369583540583");
+            var result = _account.Like("10166091207755725", "100919705469766");
+            Assert.True(result);
+        }
+        [Fact]
+        public void Comment()
+        {
+            var result = _account.Comment("3392982234152953", "Ohh, nice!");
             Assert.True(result);
         }
     }
