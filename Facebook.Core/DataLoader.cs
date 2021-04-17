@@ -1,11 +1,10 @@
 ﻿using Leaf.xNet;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Twitter.Core
+namespace Facebook.Core
 {
     public static class DataLoader
     {

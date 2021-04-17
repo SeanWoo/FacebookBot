@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Twitter.Core;
+using Facebook.Core;
 using Xunit;
+using Moq;
 
 namespace Facebook.Tests
 {
@@ -20,19 +21,19 @@ namespace Facebook.Tests
             _account.Authorization();
         }
         [Fact]
-        public void Like()
+        public void Like_PostId_True()
         {
             var result = _account.Like("10166091207755725");
             Assert.True(result);
         }
         [Fact]
-        public void LikeComment()
+        public void Like_PostIdAndCommentId_True()
         {
             var result = _account.Like("10166091207755725", "100919705469766");
             Assert.True(result);
         }
         [Fact]
-        public void Comment()
+        public void Comment_PostId_True()
         {
             var result = _account.Comment("3392982234152953", "Ohh, nice!");
             Assert.True(result);

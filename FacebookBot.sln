@@ -7,7 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.CLI", "Facebook.CL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.Core", "Facebook.Core\Facebook.Core.csproj", "{6D5EBDBC-7298-4D41-BCC3-5DADD2AE83A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.Tests", "Facebook.Tests\Facebook.Tests.csproj", "{5D64EE4F-001F-4365-87E0-CBF9F7B0B94E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facebook.Tests", "Facebook.Tests\Facebook.Tests.csproj", "{5D64EE4F-001F-4365-87E0-CBF9F7B0B94E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.Bll", "Facebook.Bll\Facebook.Bll.csproj", "{E18B00D1-8079-4DF4-BDEC-6384D7C043FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.DI", "Facebook.DI\Facebook.DI.csproj", "{E1408A74-02DE-4AF6-912C-0F866FFCB86A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{5D64EE4F-001F-4365-87E0-CBF9F7B0B94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D64EE4F-001F-4365-87E0-CBF9F7B0B94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D64EE4F-001F-4365-87E0-CBF9F7B0B94E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18B00D1-8079-4DF4-BDEC-6384D7C043FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18B00D1-8079-4DF4-BDEC-6384D7C043FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18B00D1-8079-4DF4-BDEC-6384D7C043FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18B00D1-8079-4DF4-BDEC-6384D7C043FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1408A74-02DE-4AF6-912C-0F866FFCB86A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1408A74-02DE-4AF6-912C-0F866FFCB86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1408A74-02DE-4AF6-912C-0F866FFCB86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1408A74-02DE-4AF6-912C-0F866FFCB86A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Twitter.Core
+namespace Facebook.Core
 {
     public class AccountData
     {

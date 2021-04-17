@@ -1,12 +1,7 @@
 ﻿using Leaf.xNet;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Twitter.Core.Proxy
+namespace Facebook.Core.Proxy
 {
     public static class ProxyProvider
     {

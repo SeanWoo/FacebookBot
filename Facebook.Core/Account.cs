@@ -1,4 +1,5 @@
-﻿using Leaf.xNet;
+﻿using Facebook.Core.Interfaces;
+using Leaf.xNet;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,11 +10,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using Twitter.Core.Proxy;
+using Facebook.Core.Proxy;
 
-namespace Twitter.Core
+namespace Facebook.Core
 {
-    public class Account
+    public class Account : IAccount
     {
         private HttpRequest _request;
         private string fb_dtsg;

@@ -1,4 +1,4 @@
-﻿namespace Twitter.Core
+﻿namespace Facebook.Core
 {
     public class CookieModel
     {
