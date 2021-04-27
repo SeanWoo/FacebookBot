@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Facebook.Bll
+namespace Facebook.Shared.Interfaces
 {
-    public class Class1
+    public interface IMessageHandler
     {
+        void Run(string[] args);
     }
 }

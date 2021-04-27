@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6D5EBDBC-7298-4D41-BCC3-5DADD2AE83A4}</ProjectGuid>
+    <ProjectGuid>{C2799612-63D2-4E31-91E7-B64FA54A0A8F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Facebook.Core</RootNamespace>
-    <AssemblyName>Facebook.Core</AssemblyName>
+    <RootNamespace>Facebook.Shared</RootNamespace>
+    <AssemblyName>Facebook.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,14 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DryIoc, Version=4.7.5.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
-      <HintPath>..\packages\DryIoc.dll.4.7.5\lib\net45\DryIoc.dll</HintPath>
-    </Reference>
     <Reference Include="Leaf.xNet, Version=5.2.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Leaf.xNet.5.2.10\lib\net45\Leaf.xNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,19 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="DataLoader.cs" />
+    <Compile Include="Interfaces\IAccount.cs" />
+    <Compile Include="Interfaces\IDataLoader.cs" />
+    <Compile Include="Interfaces\IFactory.cs" />
+    <Compile Include="Interfaces\IMessageHandler.cs" />
+    <Compile Include="Interfaces\IProxyProvider.cs" />
+    <Compile Include="Models\AccountData.cs" />
+    <Compile Include="Models\CookieModel.cs" />
+    <Compile Include="Models\Extensions\EnumerableExtension.cs" />
+    <Compile Include="Models\SettingsReader.cs" />
+    <Compile Include="Models\SharedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Facebook.Shared\Facebook.Shared.csproj">
-      <Project>{C2799612-63D2-4E31-91E7-B64FA54A0A8F}</Project>
-      <Name>Facebook.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

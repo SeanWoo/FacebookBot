@@ -1,4 +1,4 @@
-﻿namespace Facebook.Core.Interfaces
+﻿namespace Facebook.DI.Interfaces
 {
     public interface IAccount
     {

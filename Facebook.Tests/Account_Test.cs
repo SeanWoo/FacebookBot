@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Facebook.Core;
 using Xunit;
 using Moq;
+using Facebook.Shared.Models;
 
 namespace Facebook.Tests
 {
@@ -11,12 +12,8 @@ namespace Facebook.Tests
         private Account _account;
         public Account_Test()
         {
-            _account = new Account(new AccountData() { 
-                Cookies = new List<CookieModel>()
-                {
-                    new CookieModel()
-                }
-            });
+            _account = new Account(new ProxyProvider(new DataLoader()));
+            _account.AccountData = new DataLoader().GetAccountsList(SharedData.PATH_TO_ACCOUNT)[0];
             _account.EnableProxies = false;
             _account.Authorization();
         }
@@ -35,7 +32,13 @@ namespace Facebook.Tests
         [Fact]
         public void Comment_PostId_True()
         {
-            var result = _account.Comment("3392982234152953", "Ohh, nice!");
+            var result = _account.Comment("599865248081271", "Ohh, nice!");
+            Assert.True(result);
+        }
+        [Fact]
+        public void CommentStream_PostId_True()
+        {
+            var result = _account.CommentStream("330789768663346", "Ohh, nice!");
             Assert.True(result);
         }
     }

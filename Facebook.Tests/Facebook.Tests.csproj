@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Facebook.CLI\Facebook.CLI.csproj" />
-    <ProjectReference Include="..\Facebook.Core\Facebook.Core.csproj" />
+    <ProjectReference Include="..\Facebook.Shared\Facebook.Shared.csproj" />
   </ItemGroup>
 
 </Project>

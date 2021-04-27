@@ -1,4 +1,4 @@
-﻿namespace Facebook.Core
+﻿namespace Facebook.Shared.Models
 {
     public class CookieModel
     {

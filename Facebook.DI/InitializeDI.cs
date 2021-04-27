@@ -1,12 +1,16 @@
-﻿using Dryloc;
+﻿using DryIoc;
+using Facebook.Core;
+using Facebook.DI.Interfaces;
 
 namespace Facebook.DI
 {
-    public class InitializeDI
+    public static class InitializeDI
     {
-        public InitializeDI()
-        {
+        private static Container _container;
 
+        static InitializeDI()
+        {
+            _container.Register<IAccount, Account>
         }
     }
 }

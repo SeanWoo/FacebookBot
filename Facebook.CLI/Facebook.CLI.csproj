@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DryIoc, Version=4.7.5.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
+      <HintPath>..\packages\DryIoc.dll.4.7.5\lib\net45\DryIoc.dll</HintPath>
+    </Reference>
     <Reference Include="Leaf.xNet, Version=5.2.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Leaf.xNet.5.2.10\lib\net45\Leaf.xNet.dll</HintPath>
     </Reference>
@@ -48,19 +51,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\EnumerableExtension.cs" />
-    <Compile Include="MessageHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingsReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Facebook.Bll\Facebook.Bll.csproj">
+      <Project>{E18B00D1-8079-4DF4-BDEC-6384D7C043FF}</Project>
+      <Name>Facebook.Bll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Facebook.Core\Facebook.Core.csproj">
       <Project>{6D5EBDBC-7298-4D41-BCC3-5DADD2AE83A4}</Project>
       <Name>Facebook.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Facebook.Shared\Facebook.Shared.csproj">
+      <Project>{c2799612-63d2-4e31-91e7-b64fa54a0a8f}</Project>
+      <Name>Facebook.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

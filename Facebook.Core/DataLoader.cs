@@ -1,4 +1,6 @@
-﻿using Leaf.xNet;
+﻿using Facebook.Shared.Interfaces;
+using Facebook.Shared.Models;
+using Leaf.xNet;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -6,9 +8,9 @@ using System.Linq;
 
 namespace Facebook.Core
 {
-    public static class DataLoader
+    public class DataLoader : IDataLoader
     {
-        public static List<AccountData> GetAccountsList(string path)
+        public List<AccountData> GetAccountsList(string path)
         {
             if (!File.Exists(path))
                 return null;
@@ -18,13 +20,19 @@ namespace Facebook.Core
 
 
             var text = File.ReadAllText(path);
+
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return new List<AccountData>();
+            }
+
             var accounts = JsonConvert.DeserializeObject<List<AccountData>>(text).Where(x => x != null).ToList();
             for (int i = 0; i < accounts.Count; i++)
                 accounts[i].Username = "Account " + i;
 
             return accounts;
         }
-        public static Queue<AccountData> GetAccountsQueue(string path)
+        public Queue<AccountData> GetAccountsQueue(string path)
         {
             var fileInfo = new FileInfo(path);
             if (fileInfo.Extension != ".json")
@@ -39,7 +47,7 @@ namespace Facebook.Core
             return new Queue<AccountData>(accounts);
         }
 
-        public static List<ProxyClient> GetProxies(string path, ProxyType proxyType)
+        public List<ProxyClient> GetProxies(string path, ProxyType proxyType)
         {
             var proxies = File.ReadAllLines(path).Select(x => {
                 var proxySplit = x.Split();
