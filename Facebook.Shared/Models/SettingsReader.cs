@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace Facebook.CLI
+namespace Facebook.Shared.Models
 {
     public static class SettingsReader
     {
