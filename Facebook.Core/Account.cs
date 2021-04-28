@@ -18,7 +18,7 @@ namespace Facebook.Core
         private string actor_id;
 
         public AccountData AccountData { get; set; }
-        public bool IsAuthorized { get; private set; }
+        public bool IsAuthorized { get; set; }
         public bool EnableProxies { get; set; } = true;
 
         public Account(IProxyProvider proxyProvider)
@@ -189,7 +189,8 @@ namespace Facebook.Core
                     ["fb_dtsg"] = fb_dtsg,
                     ["fb_api_caller_class"] = "RelayModern",
                     ["fb_api_req_friendly_name"] = "GFICreateCommentMutation",
-                    ["variables"] = "{\"feedLocation\":\"TAHOE\",\"input\":{\"attachments\":null,\"feedback_id\":\"" + feedbackId + "\",\"formatting_style\":null,\"message\":{\"ranges\":[],\"text\":\"" + message + "\"},\"reply_target_clicked\":false,\"is_tracking_encrypted\":true,\"tracking\":[],\"live_video_timestamp\":5903,\"feedback_source\":\"TAHOE\",\"idempotence_token\":\"client:" + idempotence_token + "\",\"session_id\":\"7532aed4-06d1-4202-b39a-fdb6f3452761\",\"actor_id\":\"" + actor_id + "\",\"client_mutation_id\":\"7\"},\"scale\":1,\"useDefaultActor\":false}",
+                    ["variables"] = "{\"feedLocation\":\"TAHOE\",\"input\":{\"attachments\":null,\"feedback_id\":\"" + feedbackId + "\",\"formatting_style\":null,\"message\":{\"ranges\":[],\"text\":\"" + message + "\"},\"reply_target_clicked\":false,\"is_tracking_encrypted\":true,\"tracking\":[],\"live_video_timestamp\":5903,\"feedback_source\":\"TAHOE\",\"idempotence_token\":\"client:" + idempotence_token + "\",\"session_id\":\"7532aed4-06d1-4202-b39a-fdb6f3452761\",\"actor_id\":\"" + actor_id + "" +
+                    "\",\"client_mutation_id\":\"7\"},\"scale\":1,\"useDefaultActor\":false}",
                     ["server_timestamps"] = "true",
                     ["doc_id"] = "4014396065250476"
                 });

@@ -31,7 +31,7 @@ namespace Facebook.Bll.Factory
                 var account = _context.Resolve<IAccount>();
                 account.AccountData = x;
                 return account;
-            });
+            }).ToList();
         }
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="Interfaces\IAccount.cs" />
     <Compile Include="Interfaces\IDataLoader.cs" />
     <Compile Include="Interfaces\IFactory.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IMessageHandler.cs" />
     <Compile Include="Interfaces\IProxyProvider.cs" />
     <Compile Include="Models\AccountData.cs" />

@@ -56,6 +56,7 @@
     <Compile Include="Handlers\LikeHandler.cs" />
     <Compile Include="Handlers\SetterAccountHandler.cs" />
     <Compile Include="Handlers\SetterProxyHandler.cs" />
+    <Compile Include="Loggers\ConsoleLogger.cs" />
     <Compile Include="MessageListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

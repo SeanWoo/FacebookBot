@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Facebook.Bll
 {
@@ -14,12 +14,14 @@ namespace Facebook.Bll
     {
         private List<KeyValuePair<string, IMessageHandler>> _commands = new List<KeyValuePair<string, IMessageHandler>>();
 
+        private CancellationTokenSource _tokenSource = new CancellationTokenSource();
+
         public MessageListener(IResolverContext context)
         {
-            CreateCommand("setProxy", new SetterProxyHandler());
-            CreateCommand("setAccount", new SetterAccountHandler());
-            CreateCommand("like", new LikeHandler(context.Resolve<IFactory<IAccount>>(), context.Resolve<IProxyProvider>()));
-            CreateCommand("comment", new CommentHandler(context.Resolve<IFactory<IAccount>>(), context.Resolve<IProxyProvider>()));
+            CreateCommand("setProxy", new SetterProxyHandler(context));
+            CreateCommand("setAccount", new SetterAccountHandler(context));
+            CreateCommand("like", new LikeHandler(context));
+            CreateCommand("comment", new CommentHandler(context));
         }
 
         public void CreateCommand(string nameCommand, IMessageHandler handler)
@@ -30,6 +32,8 @@ namespace Facebook.Bll
 
         public void Start()
         {
+            Console.Title = "FacebookBot";
+
             string command;
             while ((command = Console.ReadLine()) != "exit")
             {
@@ -39,7 +43,13 @@ namespace Facebook.Bll
 
                 if (_commands.Any(x => x.Key == nameCommand))
                 {
-                    _commands.First(x => x.Key == nameCommand).Value.Run(args);
+                    _commands.First(x => x.Key == nameCommand).Value.Run(args, _tokenSource.Token);
+                }
+                else if (command == "q")
+                {
+                    _tokenSource.Cancel();
+                    _tokenSource.Dispose();
+                    _tokenSource = new CancellationTokenSource();
                 }
                 else
                 {

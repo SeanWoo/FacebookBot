@@ -1,6 +1,7 @@
 ﻿using DryIoc;
 using Facebook.Bll;
 using Facebook.Bll.Factory;
+using Facebook.Bll.Loggers;
 using Facebook.Core;
 using Facebook.Shared.Interfaces;
 
@@ -21,6 +22,7 @@ namespace Facebook.CLI
         {
             c.Register<MessageListener>(Reuse.Singleton);
 
+            c.Register<ILogger, ConsoleLogger>(Reuse.Singleton);
             c.Register<IProxyProvider, ProxyProvider>(Reuse.Singleton);
             c.Register<IDataLoader, DataLoader>(Reuse.Singleton);
 

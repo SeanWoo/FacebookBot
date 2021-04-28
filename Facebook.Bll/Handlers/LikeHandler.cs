@@ -1,33 +1,42 @@
-﻿using Facebook.CLI;
+﻿using DryIoc;
+using Facebook.CLI;
 using Facebook.Shared.Interfaces;
 using Facebook.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Facebook.Bll.Handlers
 {
     public class LikeHandler : IMessageHandler
     {
+        private ILogger _logger;
+        private IFactory<IAccount> _factory;
+        private IProxyProvider _proxyProvider;
+
         private IEnumerable<IAccount> _accounts;
 
-        public LikeHandler(IFactory<IAccount> accounts, IProxyProvider provider)
+        public LikeHandler(IResolverContext context)
         {
-            _accounts = accounts.Get();
+            _logger = context.Resolve<ILogger>();
+            _factory = context.Resolve<IFactory<IAccount>>();
+            _proxyProvider = context.Resolve<IProxyProvider>();
 
-            provider.LoadProxy(SharedData.PATH_TO_PROXY, SettingsReader.ProxyType);
+            _accounts = _factory.Get();
+            _proxyProvider.LoadProxy(SharedData.PATH_TO_PROXY, SettingsReader.ProxyType);
         }
 
-        public void Run(string[] args)
+        public async Task Run(string[] args, CancellationToken cancellationToken)
         {
-            var ids = args.Last().Split('/');
+            var ids = args.Last().Split(':');
 
             var postId = ids.First();
             var commentId = ids.Length > 1 ? ids.Last() : null;
 
             int.TryParse(args.SkipWhile(x => x != "-c").Take(2).Last(), out int countLikes);
+            var isProxyDisable = args.Any(x => x == "--proxy-disable");
 
             if (countLikes == 0)
             {
@@ -40,18 +49,25 @@ namespace Facebook.Bll.Handlers
                 Console.WriteLine("Вы указали слишком большое кол-во лайков");
                 return;
             }
-
-            foreach (var account in _accounts)
-            {
-                if (countLikes == 0) break;
-                if (account.Authorization())
+            await Task.Run(() => { 
+                foreach (var account in _accounts)
                 {
-                    if (account.Like(postId, commentId))
+                    if (countLikes == 0 || cancellationToken.IsCancellationRequested) break;
+
+                    if(isProxyDisable)
+                        account.EnableProxies = false;
+
+                    if (account.Authorization())
                     {
-                        countLikes--;
+                        if (account.Like(postId, commentId))
+                        {
+                            countLikes--;
+                            _logger.Log($"Осталось лайков: {countLikes}");
+                        }
                     }
                 }
-            }
+            }, cancellationToken);
+            _logger.Log($"Завершено");
         }
     }
 }
