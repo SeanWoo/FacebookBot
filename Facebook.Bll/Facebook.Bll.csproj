@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory\AccountFactory.cs" />
+    <Compile Include="Handlers\AuthHandler.cs" />
     <Compile Include="Handlers\CommentHandler.cs" />
+    <Compile Include="Handlers\HelpHandler.cs" />
     <Compile Include="Handlers\LikeHandler.cs" />
     <Compile Include="Handlers\SetterAccountHandler.cs" />
     <Compile Include="Handlers\SetterProxyHandler.cs" />

@@ -2,12 +2,9 @@
 using Facebook.Shared.Interfaces;
 using Facebook.Shared.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Facebook.Bll.Factory
 {
@@ -27,7 +24,8 @@ namespace Facebook.Bll.Factory
                 return null;
             if (!result.Any())
                 return null;
-            return result.Select(x => {
+            return result.Select(x =>
+            {
                 var account = _context.Resolve<IAccount>();
                 account.AccountData = x;
                 return account;

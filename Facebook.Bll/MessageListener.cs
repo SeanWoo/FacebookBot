@@ -16,8 +16,10 @@ namespace Facebook.Bll
 
         public MessageListener(IResolverContext context)
         {
+            CreateCommand("help", new HelpHandler(context));
             CreateCommand("setProxy", new SetterProxyHandler(context));
             CreateCommand("setAccount", new SetterAccountHandler(context));
+            CreateCommand("auth", new AuthHandler(context));
             CreateCommand("like", new LikeHandler(context));
             CreateCommand("comment", new CommentHandler(context));
         }

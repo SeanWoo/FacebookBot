@@ -1,13 +1,10 @@
 ﻿using DryIoc;
-using Facebook.CLI;
 using Facebook.Shared.Interfaces;
 using Facebook.Shared.Models;
 using Facebook.Shared.Models.Extensions;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -55,7 +52,8 @@ namespace Facebook.Bll.Handlers
                 return;
             }
 
-            await Task.Run(() => { 
+            await Task.Run(() =>
+            {
                 var comments = File.ReadAllLines(filePath);
                 do
                 {

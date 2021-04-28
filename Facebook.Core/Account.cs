@@ -1,12 +1,11 @@
-﻿using Leaf.xNet;
+﻿using Facebook.Shared.Interfaces;
+using Facebook.Shared.Models;
+using Leaf.xNet;
 using System;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using Facebook.Shared.Interfaces;
-using DryIoc;
-using Facebook.Shared.Models;
 
 namespace Facebook.Core
 {
@@ -74,7 +73,7 @@ namespace Facebook.Core
                         IsAuthorized = true;
                     else
                         IsAuthorized = false;
-                    
+
                     break;
                 }
                 catch (HttpException)
@@ -97,6 +96,123 @@ namespace Facebook.Core
 
             return IsAuthorized;
         }
+        public bool Registration(string firstname, string lastname, string email, string password)
+        {
+            _request.AllowAutoRedirect = true;
+
+            var response = _request.Get("http://www.facebook.com/r.php");
+
+            var textResponse = response.ToString();
+
+            string reg_instance = Regex.Match(textResponse, "name=\"reg_instance\"\\s+value=\"([^\"]+)").Groups[1].Value;
+            string captcha_persist_data = Regex.Match(textResponse, "name=\"captcha_persist_data\"\\s+value=\"([^\"]+)").Groups[1].Value;
+            string captcha_session = Regex.Match(textResponse, "name=\"captcha_session\"\\s+value=\"([^\"]+)").Groups[1].Value;
+            string extra_challenge_params = Regex.Match(textResponse, "name=\"extra_challenge_params\"\\s+value=\"([^\"]+)").Groups[1].Value;
+            string revision = Regex.Match(textResponse, "\"revision\":([\\d]+)").Groups[1].Value;
+            string token = Regex.Match(textResponse, "\"token\":\"([^\"]+)\"").Groups[1].Value;
+            string ph = Regex.Match(textResponse, "\"push_phase\":\"([^\"]+)\"").Groups[1].Value;
+            string locale = Regex.Match(textResponse, "name=\"locale\"\\s+value=\"([^\"]+)").Groups[1].Value;
+
+            _request.AddHeader("accept", "*/*");
+            _request.AddHeader("accept-encoding", "gzip, deflate");
+            _request.AddHeader("accept-language", "en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7");
+            _request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            _request.AddHeader("origin", "https://www.facebook.com");
+            _request.AddHeader("referer", "https://www.facebook.com/");
+            _request.AddHeader("sec-ch-ua", "\" Not A; Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google Chrome\";v=\"90\"");
+            _request.AddHeader("sec-ch-ua-mobile", "?0");
+            _request.AddHeader("sec-fetch-dest", "empty");
+            _request.AddHeader("sec-fetch-mode", "cors");
+            _request.AddHeader("sec-fetch-site", "same-origin");
+            _request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36");
+            _request.AddHeader("x-fb-lsd", token);
+
+            response = _request.Post("https://www.facebook.com/ajax/bz", new RequestParams() {
+                ["__a"] = "1",
+                ["__dyn"] = "7wiXwNAwsUKEkxqnFw",
+                ["__req"] = "1",
+                ["__rev"] = revision,
+                ["__user"] = "0",
+                ["lsd"] = token,
+                ["miny_encode_ms"] = "2",
+                ["ph"] = ph,
+                ["ts"] = Convert.ToInt64(DateTime.Now.Subtract(new DateTime(1970, 1, 1, 7, 0, 0)).TotalMilliseconds).ToString(),
+            });
+
+            _request.AddHeader("accept", "*/*");
+            _request.AddHeader("accept-encoding", "gzip, deflate");
+            _request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            _request.AddHeader("origin", "https://www.facebook.com");
+            _request.AddHeader("referer", "https://www.facebook.com/");
+            _request.AddHeader("sec-ch-ua", "\" Not A; Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google Chrome\";v=\"90\"");
+            _request.AddHeader("sec-ch-ua-mobile", "?0");
+            _request.AddHeader("sec-fetch-dest", "empty");
+            _request.AddHeader("sec-fetch-mode", "cors");
+            _request.AddHeader("sec-fetch-site", "same-origin");
+            _request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36");
+            _request.AddHeader("x-fb-lsd", token);
+
+            response = _request.Post("https://www.facebook.com/ajax/register.php", new RequestParams()
+            {
+                ["jazoest"] = "2991",
+                ["lsd"] = token,
+                ["firstname"] = firstname,
+                ["lastname"] = lastname,
+                ["reg_email__"] = email,
+                ["reg_email_confirmation__"] = email,
+                ["reg_passwd__"] = password,
+                ["birthday_month"] = "7",
+                ["birthday_day"] = "12",
+                ["birthday_year"] = "1993",
+                ["birthday_age"] = "",
+                ["did_use_age"] = "false",
+                ["sex"] = "2",
+                ["preferred_pronoun"] = "",
+                ["custom_gender"] = "",
+                ["referrer"] = "",
+                ["asked_to_login"] = "0",
+                ["use_custom_gender"] = "",
+                ["terms"] = "on",
+                ["ns"] = "0",
+                ["ph"] = ph,//необяз
+                ["ts"] = Convert.ToInt64(DateTime.Now.Subtract(new DateTime(1970, 1, 1, 7, 0, 0)).TotalMilliseconds).ToString(),//необяз
+                ["ri"] = "ddc6f278-577e-4bc6-979c-95f225982372",
+                ["action_dialog_shown"] = "",
+                ["ignore"] = "captcha",
+                ["locale"] = "en_US",
+                ["reg_instance"] = reg_instance,
+                ["captcha_persist_data"] = captcha_persist_data,
+                ["captcha_response"] = "",
+                ["__user"] = "0",
+                ["__a"] = "1",
+                ["__dyn"] = token,
+                ["__csr"] = "",
+                ["__req"] = "9",
+                ["__beoa"] = "0",
+                ["__pc"] = "PHASED:DEFAULT",
+                ["__bhv"] = "2",
+                ["dpr"] = "1",
+                ["__ccg"] = "UNKNOWN",
+                ["__rev"] = revision,
+                ["__s"] = "nnxu6e:ml4boj:9uyqb9",
+                ["__hsi"] = "6956222741722106030-0",
+                ["__comet_req"] = "0",
+                ["__spin_r"] = "1003699057",
+                ["__spin_b"] = "trunk",
+                ["__spin_t"] = "1619621818",
+            });
+
+            string error = Regex.Match(response.ToString(), "\"error\":\"([^\"]+)\"").Groups[1].Value;
+            string redirect = Regex.Match(response.ToString(), "\"redirect\":\"(.*?)\"").Groups[1].Value.Replace("\\", "");
+
+            if (!string.IsNullOrWhiteSpace(redirect))
+            {
+                response = _request.Get(redirect);
+            }
+
+            return true;
+        }
+
         public bool Like(string id, string id_comment = null)
         {
             if (!IsAuthorized)

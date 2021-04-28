@@ -1,5 +1,4 @@
 ﻿using DryIoc;
-using Facebook.CLI;
 using Facebook.Shared.Interfaces;
 using Facebook.Shared.Models;
 using System;
@@ -49,12 +48,13 @@ namespace Facebook.Bll.Handlers
                 Console.WriteLine("Вы указали слишком большое кол-во лайков");
                 return;
             }
-            await Task.Run(() => { 
+            await Task.Run(() =>
+            {
                 foreach (var account in _accounts)
                 {
                     if (countLikes == 0 || cancellationToken.IsCancellationRequested) break;
 
-                    if(isProxyDisable)
+                    if (isProxyDisable)
                         account.EnableProxies = false;
 
                     if (account.Authorization())

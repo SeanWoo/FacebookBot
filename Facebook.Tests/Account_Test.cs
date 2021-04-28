@@ -18,6 +18,12 @@ namespace Facebook.Tests
             _account.Authorization();
         }
         [Fact]
+        public void Registration_True()
+        {
+            var result = _account.Registration("Vasya", "Pupkin", "naidu.sainath@gmail.com", "Loading999");
+            Assert.True(result);
+        }
+        [Fact]
         public void Like_PostId_True()
         {
             var result = _account.Like("10166091207755725");
@@ -36,6 +42,7 @@ namespace Facebook.Tests
             Assert.True(result);
         }
         [Fact]
+
         public void CommentStream_PostId_True()
         {
             var result = _account.CommentStream("330789768663346", "Ohh, nice!");

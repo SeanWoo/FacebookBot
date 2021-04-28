@@ -9,6 +9,7 @@ namespace Facebook.Shared.Interfaces
         bool IsAuthorized { get; set; }
 
         bool Authorization();
+        bool Registration(string firstname, string lastname, string email, string password);
         bool Like(string id, string id_comment = null);
         bool Comment(string id, string message);
         bool CommentStream(string id, string message);
