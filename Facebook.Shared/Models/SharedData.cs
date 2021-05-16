@@ -1,4 +1,6 @@
-﻿namespace Facebook.Shared.Models
+﻿using System.IO;
+
+namespace Facebook.Shared.Models
 {
     public static class SharedData
     {

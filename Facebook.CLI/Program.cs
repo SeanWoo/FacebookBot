@@ -15,6 +15,7 @@ namespace Facebook.CLI
         static void Main(string[] args)
         {
             Register();
+            Initialize();
             StartServices();
         }
 
@@ -29,6 +30,11 @@ namespace Facebook.CLI
             c.Register<IAccount, Account>(Reuse.Transient);
 
             c.Register<IFactory<IAccount>, AccountFactory>(Reuse.Singleton);
+        }
+
+        private static void Initialize()
+        {
+            FileInitializer.Initialize();
         }
 
         private static void StartServices()

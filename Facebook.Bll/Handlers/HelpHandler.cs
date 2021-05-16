@@ -33,13 +33,15 @@ namespace Facebook.Bll.Handlers
                         "\n" +
                         "   like - накручивает лайки на нужный пост\n" +
                         "       Использование:\n" +
-                        "           like -c COUNT [--proxy-disable] ID_POST\n" +
+                        "           like -c COUNT [--proxy-disable] ID_POST[:ID_COMMENT]\n" +
                         "\n" +
                         "           -c COUNT - количество лайков\n" +
                         "           --proxy-disable - выключить использование прокси\n" +
+                        "           ID_COMMENT - после ID_POST через : указывается идентификатор комментария\n" +
                         "       Пример:\n" +
                         "           like -с 15 18543654365\n" +
                         "           like -с 15 --proxy-disable 18543654365\n" +
+                        "           like -с 15 --proxy-disable 18543654365:75643573645\n" +
                         "\n" +
                         "\n" +
                         "   comment - накручивает комменты на нужный пост\n" +

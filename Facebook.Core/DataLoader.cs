@@ -13,10 +13,10 @@ namespace Facebook.Core
         public List<AccountData> GetAccountsList(string path)
         {
             if (!File.Exists(path))
-                return null;
+                return new List<AccountData>();
 
             if (new FileInfo(path).Extension != ".json")
-                return null;
+                return new List<AccountData>();
 
 
             var text = File.ReadAllText(path);
@@ -34,9 +34,12 @@ namespace Facebook.Core
         }
         public Queue<AccountData> GetAccountsQueue(string path)
         {
+            if (!File.Exists(path))
+                return new Queue<AccountData>();
+
             var fileInfo = new FileInfo(path);
             if (fileInfo.Extension != ".json")
-                return null;
+                return new Queue<AccountData>();
 
             var text = File.ReadAllText(path);
             var accounts = JsonConvert.DeserializeObject<List<AccountData>>(text).Where(x => x != null).ToList();
@@ -49,6 +52,9 @@ namespace Facebook.Core
 
         public List<ProxyClient> GetProxies(string path, ProxyType proxyType)
         {
+            if (!File.Exists(path))
+                return new List<ProxyClient>();
+
             var proxies = File.ReadAllLines(path).Select(x => {
                 var proxySplit = x.Split();
                 var client = ProxyClient.Parse(proxyType, proxySplit[0]);
